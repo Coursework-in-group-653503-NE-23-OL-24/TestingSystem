@@ -1,0 +1,92 @@
+object FCharacteristics: TFCharacteristics
+  Left = 0
+  Top = 0
+  Caption = 'FCharacteristics'
+  ClientHeight = 600
+  ClientWidth = 800
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -16
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  PixelsPerInch = 96
+  TextHeight = 19
+  object Label1: TLabel
+    Left = 16
+    Top = 16
+    Width = 188
+    Height = 23
+    Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1074#1086#1087#1088#1086#1089#1086#1074
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 16
+    Top = 52
+    Width = 263
+    Height = 23
+    Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1074#1072#1088#1080#1072#1085#1090#1086#1074' '#1086#1090#1074#1077#1090#1072
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object EditQuestionsAmount: TEdit
+    Left = 285
+    Top = 8
+    Width = 46
+    Height = 31
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    Text = '3'
+    OnClick = EditQuestionsAmountClick
+    OnEnter = EditQuestionsAmountEnter
+    OnExit = EditQuestionsAmountExit
+  end
+  object EditVariantsAmount: TEdit
+    Left = 285
+    Top = 45
+    Width = 46
+    Height = 31
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 2
+    Text = '6'
+    OnClick = EditVariantsAmountClick
+    OnEnter = EditVariantsAmountEnter
+    OnExit = EditVariantsAmountExit
+  end
+  object ButtonGoBack: TButton
+    Left = 104
+    Top = 136
+    Width = 177
+    Height = 49
+    Caption = #1053#1072#1079#1072#1076
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    OnClick = ButtonGoBackClick
+  end
+end
