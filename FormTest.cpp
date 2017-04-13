@@ -265,76 +265,36 @@ void __fastcall TFTest::ButtonAnswerClick(TObject *Sender)
 	int position = FStart->ComboBoxUsers->ItemIndex+1;
 	const int COLS_AMOUNT = 4;
 
-
-
 	ExcelApplication=CreateOleObject("Excel.Application");
 	ExcelBooks=ExcelApplication.OlePropertyGet("Workbooks").OlePropertyGet("Open",StringToOleStr(WayToFile));
 	Sheet=ExcelBooks.OlePropertyGet("Worksheets",1);
 	int rowsCount=Sheet.OlePropertyGet("UsedRange").OlePropertyGet("Rows").OlePropertyGet("Count");
 
-
-
 	for (i = 0; i < rowsCount; i++) {
 		cellb=Sheet.OlePropertyGet("Cells").OlePropertyGet("Item",i+1,1);//Текст клетки B
 		cellc=Sheet.OlePropertyGet("Cells").OlePropertyGet("Item",i+1,3);//Текст клетки C
 		celld=Sheet.OlePropertyGet("Cells").OlePropertyGet("Item",i+1,4);//Текст клетки D
-
 		celld = IntToStr(StrToInt(celld)*StrToInt(cellc));
-
 		cellc = IntToStr(StrToInt(cellc)+1);
-
 		celld = IntToStr(StrToInt(celld)+testStatistics.testResult());
-
 		celld=FloatToStr((float)StrToInt(celld)/StrToInt(cellc));
 
 		if (FStart->ComboBoxUsers->Text==cellb) {
 			addToCell(Sheet,i+1,2,IntToStr(testStatistics.testResult()));
-
 			addToCell(Sheet,i+1,3,cellc);
-
 			addToCell(Sheet,i+1,4,celld);
-
 		}
 	}
 
 
 	ExcelApplication.OlePropertyGet("Workbooks").OlePropertyGet("Item",1).OleProcedure("Save");
-
 	ExcelApplication.OleProcedure("Quit");
-
 	FStart->ComboBoxUsers->ItemIndex=0;//выбор первого пользователя по умолчанию
-
-
-
-			// Открыть эксель пользователи
-			// Записать testStatistics.testResult()    в поле В
-
-
-			// Считать количество пройденных тестов
-			// увеличить его на 1
-			// записать новое значение в соответствующую ячейку
-
-
-			// считать средний балл
-			// умножить на количество пройденных тестов(до увелич. на 1)
-			// прибавить оценку за текущий тест //получаем сумму баллов
-			// получить новый средний балл: разделить сумму на увеличенное количество пройденных тестов
-			// записать в ячейку новый средний балл
 
 			AnsiString text="Вы набрали "+IntToStr(result)+temp+"из "+IntToStr(testStatistics.getMaxPoints());
 			LabelResult->Caption=text;
-
 			LabelWrongAnswers->Caption="Неправильно отвечены вопросы: "+testStatistics.getWrongAnswers();
 			LabelMark->Caption="Оценка: "+IntToStr(testStatistics.testResult());
-
-
-
-
-
-
-
-
-
 			LabelEnd->Visible=true;
 			LabelResult->Visible=true;
 			ButtonGoBack->Visible=true;
