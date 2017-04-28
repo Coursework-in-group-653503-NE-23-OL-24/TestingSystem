@@ -10,6 +10,8 @@
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.Dialogs.hpp>
 #include "UsersForm.h"
+#include <Vcl.Imaging.jpeg.hpp>
+#include <Vcl.MPlayer.hpp>
 //---------------------------------------------------------------------------
 class TFStart : public TForm
 {

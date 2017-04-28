@@ -196,11 +196,11 @@ void __fastcall TUsersF::FormActivate(TObject *Sender)
 	user.setAllTestsResult(StrToInt(temp));
 
 	temp=Sheet.OlePropertyGet("Cells").OlePropertyGet("Item",position,4);//Текст клетки d (Последняя оценка)
-	user.setAverageScore(StrToInt(temp));
+	user.setAverageScore(StrToFloat(temp));
 
 
 
-
+	ExcelApplication.OleProcedure("Quit");
 }
 //---------------------------------------------------------------------------
 

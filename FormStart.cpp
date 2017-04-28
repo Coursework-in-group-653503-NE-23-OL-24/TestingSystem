@@ -23,8 +23,11 @@ __fastcall TFStart::TFStart(TComponent* Owner)
 {
 }
 
+int resolutionX,resolutionY;
+
 bool isRandomTest;
 AnsiString username;
+AnsiString CURRENT_DIRECTORY;
 
 void open(){
 	FStart->Hide();
@@ -52,6 +55,7 @@ void __fastcall TFStart::ButtonSettingsClick(TObject *Sender)
 
 void __fastcall TFStart::ButtonStartCreatedTestClick(TObject *Sender)
 {
+	FStart->OpenDialog1->InitialDir=CURRENT_DIRECTORY+"\\тестирования";
 	if (OpenDialog1->Execute()) {
 		isRandomTest=false;
 		open();
@@ -62,47 +66,52 @@ void __fastcall TFStart::ButtonStartCreatedTestClick(TObject *Sender)
 void __fastcall TFStart::FormActivate(TObject *Sender)
 {
 	ComboBoxUsers->Clear();
+	resolutionX=GetSystemMetrics(SM_CXSCREEN);
+	resolutionY=GetSystemMetrics(SM_CYSCREEN);
 
 	AnsiString temp;
-	AnsiString WayToFile;
 	Variant ExcelApplication,ExcelBooks,Sheet,Cell;
-	WayToFile="d:\\курсовой проект\\Пользователи.xlsx";
+	wchar_t buffer[200];
+	GetCurrentDirectory(sizeof(buffer),buffer);
+	CURRENT_DIRECTORY=(AnsiString)buffer;
 	int rowsCount,i;
 	User *usersArray;
 
-	ExcelApplication=CreateOleObject("Excel.Application");
-	ExcelBooks=ExcelApplication.OlePropertyGet("Workbooks").OlePropertyGet("Open",StringToOleStr(WayToFile));
-	Sheet=ExcelBooks.OlePropertyGet("Worksheets",1);
-	rowsCount=Sheet.OlePropertyGet("UsedRange").OlePropertyGet("Rows").OlePropertyGet("Count");
+	try{
+		ExcelApplication=CreateOleObject("Excel.Application");
+		ExcelBooks=ExcelApplication.OlePropertyGet("Workbooks").OlePropertyGet("Open",StringToOleStr(CURRENT_DIRECTORY+"\\Users.xlsx"));
+		Sheet=ExcelBooks.OlePropertyGet("Worksheets",1);
+		rowsCount=Sheet.OlePropertyGet("UsedRange").OlePropertyGet("Rows").OlePropertyGet("Count");
+	}
+	catch(...){
+		Application->Title="Ошибка";
+		ShowMessage("Ошибка при открытии файла\n"+CURRENT_DIRECTORY+"\\Пользователи.xlsx"+"\nПроверьте наличие файла \"Users.xlsx\" в директории\n"+CURRENT_DIRECTORY);
+		ExcelApplication.OleProcedure("Quit");
+		FStart->Close();
+	}
 
 	usersArray=new User[rowsCount];     //дин. массив пользователей
 
-
-	for (int i=1; i <= rowsCount; i++) {
-		temp=Sheet.OlePropertyGet("Cells").OlePropertyGet("Item",i,1);//Текст клетки А1
-		usersArray[i-1].setName(temp); //считывание имени пользователя с таблицы
+	try{
+		for (int i=1; i <= rowsCount; i++) {
+			temp=Sheet.OlePropertyGet("Cells").OlePropertyGet("Item",i,1);//Текст клетки А1
+			usersArray[i-1].setName(temp); //считывание имени пользователя с таблицы
+		}
+		for (i = 0; i < rowsCount; i++) {
+			ComboBoxUsers->Items->Add(usersArray[i].getName());
+		}
 	}
-	for (i = 0; i < rowsCount; i++) {
-		ComboBoxUsers->Items->Add(usersArray[i].getName());   /*Items - массив обьектов компонента combobox
-														т.е. строк.
-														add - добавление строки в конец массива
-															 */
+	catch(...){
+		Application->Title="Ошибка";
+		ShowMessage("Ошибка при считывании данных из файла\n"+CURRENT_DIRECTORY+"\\Users.xlsx");
+		ExcelApplication.OleProcedure("Quit");
 	}
 
 	ComboBoxUsers->ItemIndex=0;//выбор первого пользователя по умолчанию
+	//ComboBoxUsers->Text=Utf8ToAnsi("а б в");
 
-	/*1.Добавить приветственные надписи типа "Добро пожаловать"
-	  2.Добавить к этой надриси обращение по имени пользователя ( "Добро пожаловать, Люба ")
-	  3.Надпись  "если это не вы , то выберите соответст. пользователя
-	  4.Открывается combobox (скрыть combobox с помощью visible=false)
-	  5.в Formtest в 380 строке добавить имя пользователя в оформляемый документ
-	  6.по окончании теста заносить статистику в таблицу
-	  7.воскресение 17-00
-	*/
 	ExcelApplication.OleProcedure("Quit");
 	delete []usersArray;
-	//delete []usersSurnameArray;
-	//delete []usersGroupArray;
 }
 //---------------------------------------------------------------------------
 
@@ -128,25 +137,37 @@ void addToCell(Variant Sheet,int row,int col,AnsiString value){
 
 void __fastcall TFStart::OKButtonClick(TObject *Sender)
 {
-	AnsiString WayToFile="d:\\курсовой проект\\Пользователи.xlsx";
 	Variant ExcelApplication,ExcelBooks,Sheet,Cell;
+	int rowsCount;
 
-	ExcelApplication=CreateOleObject("Excel.Application");
-	ExcelBooks=ExcelApplication.OlePropertyGet("Workbooks").OlePropertyGet("Open",StringToOleStr(WayToFile));
-	Sheet=ExcelBooks.OlePropertyGet("Worksheets",1);
-	int rowsCount=Sheet.OlePropertyGet("UsedRange").OlePropertyGet("Rows").OlePropertyGet("Count");
+	try{
+		ExcelApplication=CreateOleObject("Excel.Application");
+		ExcelBooks=ExcelApplication.OlePropertyGet("Workbooks").OlePropertyGet("Open",StringToOleStr(CURRENT_DIRECTORY+"\\Users.xlsx"));
+		Sheet=ExcelBooks.OlePropertyGet("Worksheets",1);
+		rowsCount=Sheet.OlePropertyGet("UsedRange").OlePropertyGet("Rows").OlePropertyGet("Count");
+	}
+	catch(...){
+		Application->Title="Ошибка";
+		ShowMessage("Ошибка при открытии файла\n"+CURRENT_DIRECTORY+"\\Users.xlsx"+"\nПроверьте наличие файла \"Users.xlsx\" в директории\n"+CURRENT_DIRECTORY);
+		ExcelApplication.OleProcedure("Quit");
+	}
 
-	AnsiString Name=NameBox->Text;
-	ComboBoxUsers->Items->Add(Name);
+	try{
+		AnsiString Name=NameBox->Text;
+		ComboBoxUsers->Items->Add(Name);
 
-	addToCell(Sheet,rowsCount+1,1,Name);
+		addToCell(Sheet,rowsCount+1,1,Name);
 
-	NameBox->Visible = false;
-	OKButton->Visible = false;
-	ExcelApplication.OlePropertyGet("Workbooks").OlePropertyGet("Item",1).OleProcedure("Save");
+		NameBox->Visible = false;
+		OKButton->Visible = false;
+		ExcelApplication.OlePropertyGet("Workbooks").OlePropertyGet("Item",1).OleProcedure("Save");
+	}
+	catch(...){
+		Application->Title="Ошибка";
+		ShowMessage("Ошибка при записи данных в файл\n"+CURRENT_DIRECTORY+"\\Users.xlsx");
+	}
 
 	ExcelApplication.OleProcedure("Quit");
-
 }
 //---------------------------------------------------------------------------
 
