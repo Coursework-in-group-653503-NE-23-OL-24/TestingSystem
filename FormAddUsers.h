@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 
-#ifndef UsersFormH
-#define UsersFormH
+#ifndef FormAddUsersH
+#define FormAddUsersH
 //---------------------------------------------------------------------------
 #include <System.Classes.hpp>
 #include <Vcl.Controls.hpp>
@@ -9,28 +9,31 @@
 #include <Vcl.Forms.hpp>
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.Imaging.jpeg.hpp>
+#include <Vcl.Imaging.GIFImg.hpp>
 //---------------------------------------------------------------------------
-class TUsersF : public TForm
+class TFAddUser : public TForm
 {
 __published:	// IDE-managed Components
-	TLabel *WelkomeLabel;
-	TButton *LastResultButton;
-	TButton *AllTestsButton;
-	TButton *AverageScoreButton;
-	TButton *InformationButton;
-	TButton *BackToTestButton;
-	void __fastcall LastResultButtonClick(TObject *Sender);
-	void __fastcall BackToTestButtonClick(TObject *Sender);
-	void __fastcall AllTestsButtonClick(TObject *Sender);
-	void __fastcall AverageScoreButtonClick(TObject *Sender);
-	void __fastcall InformationButtonClick(TObject *Sender);
-	void __fastcall FormActivate(TObject *Sender);
+	TEdit *NameBox;
+	TEdit *SurnameBox;
+	TEdit *GroupBox;
+	TButton *AddButton;
+	TLabel *NameLabel;
+	TLabel *SurnameLabel;
+	TLabel *GroupLabel;
+	TButton *ReturnButton;
+	TImage *WelkomeImage;
+	void __fastcall AddButtonClick(TObject *Sender);
+	void __fastcall NameBoxChange(TObject *Sender);
+	void __fastcall SurnameBoxChange(TObject *Sender);
+	void __fastcall GroupBoxChange(TObject *Sender);
+	void __fastcall ReturnButtonClick(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 private:	// User declarations
 public:		// User declarations
-	__fastcall TUsersF(TComponent* Owner);
+	__fastcall TFAddUser(TComponent* Owner);
 };
 //---------------------------------------------------------------------------
-extern PACKAGE TUsersF *UsersF;
+extern PACKAGE TFAddUser *FAddUser;
 //---------------------------------------------------------------------------
 #endif

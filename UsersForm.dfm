@@ -2,7 +2,7 @@ object UsersF: TUsersF
   Left = 0
   Top = 0
   Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1086' '#1087#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1077
-  ClientHeight = 472
+  ClientHeight = 532
   ClientWidth = 671
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -12,6 +12,7 @@ object UsersF: TUsersF
   Font.Style = []
   OldCreateOrder = False
   OnActivate = FormActivate
+  OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
   object WelkomeLabel: TLabel
@@ -29,7 +30,7 @@ object UsersF: TUsersF
   end
   object LastResultButton: TButton
     Left = 40
-    Top = 96
+    Top = 80
     Width = 585
     Height = 49
     Caption = #1056#1077#1079#1091#1083#1100#1090#1072#1090' '#1087#1086#1089#1083#1077#1076#1085#1077#1075#1086' '#1087#1088#1086#1081#1076#1077#1085#1085#1086#1075#1086' '#1090#1077#1089#1090#1072
@@ -44,7 +45,7 @@ object UsersF: TUsersF
   end
   object AllTestsButton: TButton
     Left = 40
-    Top = 168
+    Top = 160
     Width = 585
     Height = 49
     Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1087#1088#1086#1081#1076#1077#1085#1085#1099#1093' '#1090#1077#1089#1090#1086#1074
@@ -74,7 +75,7 @@ object UsersF: TUsersF
   end
   object InformationButton: TButton
     Left = 40
-    Top = 312
+    Top = 319
     Width = 585
     Height = 49
     Caption = #1042#1089#1103' '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1086' '#1087#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1077
@@ -89,9 +90,9 @@ object UsersF: TUsersF
   end
   object BackToTestButton: TButton
     Left = 40
-    Top = 392
+    Top = 395
     Width = 585
-    Height = 49
+    Height = 46
     Caption = #1042#1077#1088#1085#1091#1090#1100#1089#1103' '#1082' '#1090#1077#1089#1090#1080#1088#1086#1074#1072#1085#1080#1102
     Font.Charset = RUSSIAN_CHARSET
     Font.Color = clWindowText

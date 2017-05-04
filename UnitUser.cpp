@@ -14,6 +14,12 @@ User::User(){
 AnsiString User::getName(){ return name;}
 void User::setName(AnsiString Name){ name=Name; }
 
+AnsiString User::getSurname(){ return surname;}
+void User::setSurname(AnsiString Surname){ surname=Surname; }
+
+AnsiString User::getGroup(){ return group;}
+void User::setGroup(AnsiString Group){ group=Group; }
+
 
 int User::getLastMark(){return lastMark;}
 void User::setLastMark(int mark){lastMark = mark;}
@@ -21,5 +27,6 @@ void User::setLastMark(int mark){lastMark = mark;}
 int User::getAllTestsResult(){return allTestsResult;}
 void User::setAllTestsResult(int result){allTestsResult = result;}
 
-int User::getAverageScore(){return averageScore;}
-void User::setAverageScore(int score){averageScore = score;}
+float User::getAverageScore(){return averageScore;}
+void User::setAverageScore(float score){averageScore = score;}
+

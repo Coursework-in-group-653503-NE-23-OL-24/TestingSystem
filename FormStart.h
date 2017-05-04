@@ -10,6 +10,8 @@
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.Dialogs.hpp>
 #include "UsersForm.h"
+#include <Vcl.Imaging.jpeg.hpp>
+#include <Vcl.MPlayer.hpp>
 //---------------------------------------------------------------------------
 class TFStart : public TForm
 {
@@ -25,6 +27,8 @@ __published:	// IDE-managed Components
 	TEdit *NameBox;
 	TButton *OKButton;
 	TButton *ButtonOfUsers;
+	TButton *TableOfRecordsButton;
+	TImage *StartImage;
 	void __fastcall ButtonStartRandomTestClick(TObject *Sender);
 	void __fastcall ButtonSettingsClick(TObject *Sender);
 	void __fastcall ButtonStartCreatedTestClick(TObject *Sender);
@@ -34,6 +38,7 @@ __published:	// IDE-managed Components
 	void __fastcall OKButtonClick(TObject *Sender);
 	void __fastcall NameBoxClick(TObject *Sender);
 	void __fastcall ButtonOfUsersClick(TObject *Sender);
+	void __fastcall TableOfRecordsButtonClick(TObject *Sender);
 
 private:	// User declarations
 public:		// User declarations

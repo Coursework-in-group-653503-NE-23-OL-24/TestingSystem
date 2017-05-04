@@ -8,9 +8,11 @@
 class User{
 	private:
 		AnsiString name;
+		AnsiString surname;
+		AnsiString group;
 		int lastMark;
 		int allTestsResult;
-		int averageScore;
+		float averageScore;
 	public:
 		User();
 
@@ -20,10 +22,16 @@ class User{
 		AnsiString getName();
 		void setName(AnsiString Name);
 
+		AnsiString getSurname();
+		void setSurname(AnsiString Surname);
+
+		AnsiString getGroup();
+		void setGroup(AnsiString Group);
+
 		int getAllTestsResult();
 		void setAllTestsResult(int result);
 
-		int getAverageScore();
-		void setAverageScore(int score);
+		float getAverageScore();
+		void setAverageScore(float score);
 
 };
